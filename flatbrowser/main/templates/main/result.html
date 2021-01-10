@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Flatbrowser {% endblock %}
+
+{% block content %}
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" scope="col">Website</th>
+                    <th class="text-center" scope="col">City</th>
+                    <th class="text-center" scope="col">Title</th>
+                    <th class="text-center" scope="col">Area</th>
+                    <th class="text-center" scope="col">Price</th>
+                    <th class="text-center" scope="col">URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for flat in flats_found %}
+                    <tr>
+                        {% if flat.site == "otodom.pl" %}
+                            <th class="text-center" scope="col"><img src="{% static 'main/otodom.png' %}" class="site-image" height="60"></th>
+                        {% elif flat.site == "olx.pl" %}
+                            <th class="text-center" scope="col"><img src="{% static 'main/olx.png' %}" class="site-image" height="60"></th>
+                        {% elif flat.site == "morizon.pl" %}
+                            <th class="text-center" scope="col"><img src="{% static 'main/morizon.png' %}" class="site-image" height="60"></th>
+                        {% endif %}
+                        <th class="text-center" scope="col" style="vertical-align: middle;">{{flat.city}}</th>
+                        <th scope="col">{{flat.title}}</th>
+                        <th class="text-center" scope="col">{{flat.area}} m<sup>2</sup></th>
+                        <th class="text-center" scope="col">{{flat.price}} zł</th>
+                        <th class="text-center" scope="col"><a href="{{flat.url}}"><i class="fas fa-chevron-circle-right"></i></a></th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

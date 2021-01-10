@@ -1,0 +1,43 @@
+{% load static %}
+{% load bootstrap %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/0ad2cb78b0.js" crossorigin="anonymous"></script>
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <div class="jumbotron">
+        <center><h1>Flatbrowser</h1></center>
+    </div>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm" style="text-align: center">
+                {{ form.city|bootstrap }}
+            </div>
+            <div class="col-sm" style="text-align: center">
+                {{ form.min_price|bootstrap }}
+            </div>
+            <div class="col-sm" style="text-align: center">
+                {{ form.max_price|bootstrap }}
+            </div>
+            <div class="col-sm" style="text-align: center">
+                {{ form.min_area|bootstrap }}
+            </div>
+            <div class="col-sm" style="text-align: center"> 
+                {{ form.max_area|bootstrap }}
+            </div>
+            <div class="col-sm" style="text-align: center">
+                {{ form.days_from_publication|bootstrap }}
+            </div>
+            <div class="col-1" style="text-align: center; ">
+                <button type="submit" class="btn btn-success">Search</button>
+            </div>
+        </div>
+    </form>
+    {% block content %} {% endblock %}
+</body>
+</html>
