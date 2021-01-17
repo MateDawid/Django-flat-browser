@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from .models import Flat
 from .forms import SearchForm
-from .functions import scrap_otodom, scrap_olx, scrap_morizon, scrap_all
+from offer_searching_engine.all_offers import get_all_offers
 
 def search_flats(request):
     form = SearchForm(request.POST or None, request.FILES or None)

@@ -110,10 +110,4 @@ def scrap_morizon(city,price_from="",price_to="",area_from="0",area_to="",days="
         offers.append({"site":"morizon.pl","city": city.title(),"title":offer_title.text.strip(),"area":round(area),"price":round(price),"url":URL, "image": image})
     return offers
 
-def scrap_all(city,price_from="0",price_to="999999999",area_from="0",area_to="999999",days="999"):
-    offers = []
-    for element in scrap_otodom(city.lower(),price_from,price_to,area_from,area_to,days):
-        offers.append(element)
-    for element in scrap_morizon(city.lower(),price_from,price_to,area_from,area_to,days):
-        offers.append(element)
-    return offers
+
