@@ -1,5 +1,5 @@
 # Flat-browser
-> This application enables to browse flat offers in chosen city, price and surface area in your webbrowser.
+> This application enables to browse flat offers in chosen city, price and surface area in your webbrowser. It collects data from external API and using webscraping.
 ## Table of contents
 * [General info](#general-info)
 * [Screenshots](#screenshots)

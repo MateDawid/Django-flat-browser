@@ -3,36 +3,38 @@
 {% block title %} Flatbrowser {% endblock %}
 
 {% block content %}
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th class="text-center" scope="col">Website</th>
-                    <th class="text-center" scope="col">City</th>
-                    <th class="text-center" scope="col">Title</th>
-                    <th class="text-center" scope="col">Area</th>
-                    <th class="text-center" scope="col">Price</th>
-                    <th class="text-center" scope="col">URL</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for flat in flats_found %}
-                    <tr>
-                        {% if flat.site == "otodom.pl" %}
-                            <th class="text-center" scope="col"><img src="{% static 'main/otodom.png' %}" class="site-image" height="60"></th>
-                        {% elif flat.site == "olx.pl" %}
-                            <th class="text-center" scope="col"><img src="{% static 'main/olx.png' %}" class="site-image" height="60"></th>
-                        {% elif flat.site == "morizon.pl" %}
-                            <th class="text-center" scope="col"><img src="{% static 'main/morizon.png' %}" class="site-image" height="60"></th>
-                        {% endif %}
-                        <th class="text-center" scope="col" style="vertical-align: middle;">{{flat.city}}</th>
-                        <th scope="col">{{flat.title}}</th>
-                        <th class="text-center" scope="col">{{flat.area}} m<sup>2</sup></th>
-                        <th class="text-center" scope="col">{{flat.price}} zł</th>
-                        <th class="text-center" scope="col"><a href="{{flat.url}}"><i class="fas fa-chevron-circle-right"></i></a></th>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    {% for flat in flats_found %}
+        
+        <div class="card mb-3 text-center border-dark" style="max-width: 1040px">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{flat.image}}" class="rounded float-left" style = "width: 400px; height: 260px; object-fit: cover"/>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="row" style="height: 100px">
+                            <div class="col">
+                                <div class="card-text">{{flat.city}}</div>
+                            </div>
+                            <div class="col">
+                                <img src="{% static 'main/otodom.png' %}" class="site-image" height="60">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p class="card-text">{{flat.area}} m<sup>2</p>
+                            </div>
+                            <div class="col">
+                                <p class="card-text">{{flat.price}} zł</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h5 class="card-text">{{flat.title}}</h5>
+                            <a href="{{flat.url}}" class="btn btn-primary">Site</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}                  
 {% endblock %}

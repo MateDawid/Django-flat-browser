@@ -18,7 +18,7 @@ def refresh_token(client_id, client_secret, refresh_token, oauth_url=DEFAULT_OAU
                              auth=requests.auth.HTTPBasicAuth(client_id, client_secret),
                              data=access_token_data)
 
-    with open('access.json', 'w') as json_file:
+    with open(os.path.join(pathlib.Path(__file__).parent.absolute(), 'access.json'), 'w') as json_file:
         json.dump(response.json(), json_file)
 
 def get_current_token():
@@ -57,11 +57,11 @@ def get_available_offers(data, city):
             offers.append(offer)
         except:
             continue
-    print(offers)
     return offers
 
+
 def get_from_allegro_api(city, price_from='', price_to='', area_from='', area_to='', days=''):
-    paramethers = {"category.id": 112739, "location.city": city, "price.from": price_from, "price.to": price_to, "parameter.236.from": area_from,"parameter.236.to": area_to, "startingTime": "P"+str(days)+"D"}
+    paramethers = {"category.id": 112739, "location.city": str(city), "price.from": str(price_from), "price.to": str(price_to), "parameter.236.from": str(area_from),"parameter.236.to": str(area_to), "startingTime": "P"+str(days)+"D"}
     
     headers = {}
     headers['charset'] = 'utf-8'

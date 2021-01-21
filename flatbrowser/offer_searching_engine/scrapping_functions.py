@@ -12,7 +12,7 @@ def get_numeric_value(area_or_price):
 
 def prepare_morizon_adress(city, price_from, price_to, area_from, area_to, days):
     # Filling URL address with variables 
-    adress = "https://www.morizon.pl/mieszkania/"+city+"/?ps%5Bprice_from%5D="+price_from+"&ps%5Bprice_to%5D="+price_to+"&ps%5Bliving_area_from%5D="+area_from+"&ps%5Bliving_area_to%5D="+area_to
+    adress = "https://www.morizon.pl/mieszkania/"+str(city)+"/?ps%5Bprice_from%5D="+str(price_from)+"&ps%5Bprice_to%5D="+str(price_to)+"&ps%5Bliving_area_from%5D="+str(area_from)+"&ps%5Bliving_area_to%5D="+str(area_to)
     
     # Setting URL based on typed "days" variable
     if days != "":  
@@ -47,7 +47,7 @@ def get_morizon_price(element):
 def scrap_otodom (city,price_from="",price_to="",area_from="0",area_to="",days=""):
     # Filling URL address with variables
     adress_city = get_valid_city(city)
-    adress = "https://www.otodom.pl/sprzedaz/mieszkanie/"+adress_city+"/?search%5Bcreated_since%5D="+days+"&search%5Bfilter_float_price%3Afrom%5D="+price_from+"&search%5Bfilter_float_price%3Ato%5D="+price_to+"&search%5Bfilter_float_m%3Afrom%5D="+area_from+"&search%5Bfilter_float_m%3Ato%5D="+area_to+"&nrAdsPerPage=72" 
+    adress = "https://www.otodom.pl/sprzedaz/mieszkanie/"+str(adress_city)+"/?search%5Bcreated_since%5D="+str(days)+"&search%5Bfilter_float_price%3Afrom%5D="+str(price_from)+"&search%5Bfilter_float_price%3Ato%5D="+str(price_to)+"&search%5Bfilter_float_m%3Afrom%5D="+str(area_from)+"&search%5Bfilter_float_m%3Ato%5D="+str(area_to)+"&nrAdsPerPage=72" 
 
     # Connecting with page
     page = requests.get(adress)
