@@ -5,34 +5,36 @@
 {% block content %}
     {% for flat in flats_found %}
         
-        <div class="card mb-3 text-center border-dark" style="max-width: 1040px">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{flat.image}}" class="rounded float-left" style = "width: 400px; height: 260px; object-fit: cover"/>
+        <div class="card mb-10 text-center border-dark" style="max-width: 940px; margin-top: 10px; margin-right: 20px; margin-bottom: 30px; margin-left: 40px;">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card-text text-center"><img src="{{flat.image}}" class="rounded" style = "width: 430px; height: 260px; object-fit: cover"/></div>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <div class="row" style="height: 100px">
-                            <div class="col">
-                                <div class="card-text">{{flat.city}}</div>
-                            </div>
-                            <div class="col">
-                                <img src="{% static 'main/otodom.png' %}" class="site-image" height="60">
-                            </div>
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="card-text text-center" style="margin-top: 40px;">{{flat.city}}</h4> 
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <p class="card-text">{{flat.area}} m<sup>2</p>
-                            </div>
-                            <div class="col">
-                                <p class="card-text">{{flat.price}} zł</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h5 class="card-text">{{flat.title}}</h5>
-                            <a href="{{flat.url}}" class="btn btn-primary">Site</a>
+                        <div class="col"> 
+                            <div class="card-text text-center" style="margin-top: 20px;"><img src="{% static 'main/otodom.png' %}" class="site-image" height="60"></div> 
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-text text-center" style="margin-top: 30px; position: absolute; word-wrap: break-word;">{{flat.title}}</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="card-text text-right" style="margin-top: 30px; margin-right: 60px;">{{flat.area}} m<sup>2</p>
+                        </div>
+                        <div class="col">
+                            <p class="card-text text-left" style="margin-top: 30px;">{{flat.price}} zł</p>
+                        </div>
+                    </div>
+                    
+                    
+                    <h5 class="card-text text-right"><a href="{{flat.url}}" class="btn btn-primary">Site</a></h5>
                 </div>
             </div>
         </div>

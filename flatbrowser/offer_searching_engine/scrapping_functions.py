@@ -10,6 +10,14 @@ def get_valid_city(city):
 def get_numeric_value(area_or_price):
     return float(area_or_price[:-3].replace(",",".").replace(" ", ""))
 
+def get_otodom_price(element):
+    price_found = element.find("li",class_="offer-item-price").text.strip()
+    if price_found == "Zapytaj o cenę" or price_found == None:
+      price = 0
+    else:
+      price = get_numeric_value(price_found)
+    return price
+
 def prepare_morizon_adress(city, price_from, price_to, area_from, area_to, days):
     # Filling URL address with variables 
     adress = "https://www.morizon.pl/mieszkania/"+str(city)+"/?ps%5Bprice_from%5D="+str(price_from)+"&ps%5Bprice_to%5D="+str(price_to)+"&ps%5Bliving_area_from%5D="+str(area_from)+"&ps%5Bliving_area_to%5D="+str(area_to)
@@ -38,7 +46,7 @@ def get_morizon_title(element):
 def get_morizon_price(element):
     price_found = element.find("p",class_="single-result__price").text.replace(u'\xa0'," ")
     if price_found == "Zapytaj o cenę" or price_found == None:
-      price = None
+      price = 0
     else:
       price = get_numeric_value(price_found)
     return price
@@ -60,7 +68,7 @@ def scrap_otodom (city,price_from="",price_to="",area_from="0",area_to="",days="
         city_name = city.title()
         if city_name in element.find("p",class_="text-nowrap").text.strip():
             offerTitle = element.find("span",class_="offer-item-title")
-            price = get_numeric_value(element.find("li",class_="offer-item-price").text.strip())
+            price = get_otodom_price(element)
             area = get_numeric_value(element.find("li",class_="hidden-xs offer-item-area").text.strip())
             URL = element["data-url"]
             image = element.find("span",class_="img-cover lazy")['data-src']
@@ -82,6 +90,12 @@ def scrap_morizon(city,price_from="",price_to="",area_from="0",area_to="",days="
       if element.find("div",attrs={"class":"description single-result__description"}) == None:
         continue
       else:
+        # Finding proper title for offer
+        if get_morizon_title(element) == None:
+          continue
+        else:
+          offer_title = get_morizon_title(element)
+        
         # Finding price of flat
         if element.find("p",class_="single-result__price") == None:
           continue
@@ -90,9 +104,6 @@ def scrap_morizon(city,price_from="",price_to="",area_from="0",area_to="",days="
 
         # Setting city name
         city_name = city.capitalize()
-
-        # Finding proper title for offer
-        offer_title = get_morizon_title(element)
         
         # Finding area of flat
         details = element.find("ul",class_="param list-unstyled list-inline").findAll("li")
@@ -109,5 +120,3 @@ def scrap_morizon(city,price_from="",price_to="",area_from="0",area_to="",days="
         # Adding offer to list
         offers.append({"site":"morizon.pl","city": city.title(),"title":offer_title.text.strip(),"area":round(area),"price":round(price),"url":URL, "image": image})
     return offers
-
-

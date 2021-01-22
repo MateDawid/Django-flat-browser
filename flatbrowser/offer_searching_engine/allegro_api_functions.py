@@ -33,7 +33,7 @@ def get_refresh_token():
 
 def get_offer_details(data, offer_type, offer_number):
     offer_title = data['items'][offer_type][offer_number]['name']
-    area = None
+    area = 0
     price = data['items'][offer_type][offer_number]['sellingMode']['price']['amount']
     URL = data['items'][offer_type][offer_number]['vendor']['url']
     image = data['items'][offer_type][offer_number]['images'][0]['url']
