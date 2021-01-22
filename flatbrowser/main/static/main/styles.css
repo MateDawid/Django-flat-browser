@@ -1,0 +1,61 @@
+body {
+    background-image: url("background.jpg");
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+form {
+  margin-left: 40px;
+  margin-right: 40px;
+  color: black;
+  font-size: large;
+  font-weight: bold;
+}
+
+#offersCount {
+    margin-left: 100px;
+}
+#offerCard {
+    max-width: 940px; 
+    max-height: 270px; 
+    margin-top: 10px; 
+    margin-right: 20px; 
+    margin-bottom: 30px; 
+    margin-left: 100px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-width: thick;
+}
+
+#offerPicture {
+    width: 430px; 
+    height: 260px; 
+    object-fit: cover;
+}
+
+#offerTitle {
+    margin-top: 30px; 
+    margin-left: 50px; 
+    margin-right: 20px;
+}
+
+#offerCity {
+    margin-left: 50px; 
+    margin-right: 20px;
+}
+
+#offerSite {
+  margin-left: 50px; 
+  margin-right: 20px;
+}
+
+#offerArea {
+  margin-top: 30px; 
+  margin-right: 60px;
+}
+
+#offerPrice {
+  margin-top: 30px;
+}

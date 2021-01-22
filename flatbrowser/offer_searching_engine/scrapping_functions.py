@@ -8,7 +8,7 @@ def get_valid_city(city):
     return city.replace(" ","-").replace("ą","a").replace("ę","e").replace("ć","c").replace("ń","n").replace("ó","o").replace("ś","s").replace("ó","o").replace("ź","z").replace("ż","z")
 
 def get_numeric_value(area_or_price):
-    return float(area_or_price[:-3].replace(",",".").replace(" ", ""))
+    return int(float(area_or_price[:-3].replace(",",".").replace(" ", "")))
 
 def get_otodom_price(element):
     price_found = element.find("li",class_="offer-item-price").text.strip()

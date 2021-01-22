@@ -3,36 +3,50 @@
 {% block title %} Flatbrowser {% endblock %}
 
 {% block content %}
+    <h1 id="offersCount"> Found offers: {{flats_found|length}} </h1>
     {% for flat in flats_found %}
         
-        <div class="card mb-10 text-center border-dark" style="max-width: 940px; margin-top: 10px; margin-right: 20px; margin-bottom: 30px; margin-left: 40px;">
+        <div id="offerCard" class="card mb-10 text-center">
             <div class="row">
-                <div class="col-md-5">
-                    <div class="card-text text-center"><img src="{{flat.image}}" class="rounded" style = "width: 430px; height: 260px; object-fit: cover"/></div>
+                <div class="col-md-5 ">
+                    <img id="offerPicture" class="card-img rounded" src="{{flat.image}}"/>
                 </div>
                 <div class="col-md-7">
                     <div class="row">
                         <div class="col">
-                            <h4 class="card-text text-center" style="margin-top: 40px;">{{flat.city}}</h4> 
-                        </div>
-                        <div class="col"> 
-                            <div class="card-text text-center" style="margin-top: 20px;"><img src="{% static 'main/otodom.png' %}" class="site-image" height="60"></div> 
+                            <h5 id="offerTitle" class="card-text text-left">{{flat.title}}</h5>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-text text-center" style="margin-top: 30px; position: absolute; word-wrap: break-word;">{{flat.title}}</h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p class="card-text text-right" style="margin-top: 30px; margin-right: 60px;">{{flat.area}} m<sup>2</p>
-                        </div>
-                        <div class="col">
-                            <p class="card-text text-left" style="margin-top: 30px;">{{flat.price}} zł</p>
+                            <h5 id="offerCity" class="card-text text-left">{{flat.city}}</h5> 
                         </div>
                     </div>
                     
+                    <div class="row">
+                        <div class="col">
+                            {% if flat.site == "allegro.pl" %}
+                                <p id="offerArea" class="card-text text-right">- m<sup>2</p>
+                            {% else %}
+                                <p id="offerArea" class="card-text text-right">{{flat.area}} m<sup>2</p>
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            <p id="offerPrice" class="card-text text-left">{{flat.price}} zł</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">  
+                        <div class="col">
+                            {% if flat.site == "otodom.pl" %}
+                                <img id="offerSite" src="{% static 'main/otodom.png' %}" class="site-image" height="60">
+                            {% elif flat.site == "morizon.pl" %}
+                                <img id="offerSite" src="{% static 'main/morizon.png' %}" class="site-image" height="60">
+                            {% elif flat.site == "allegro.pl" %}
+                                <img id="offerSite" src="{% static 'main/allegro.png' %}" class="site-image" height="60">
+                            {% endif %}                    
+                        </div>
+                    </div>
                     
                     <h5 class="card-text text-right"><a href="{{flat.url}}" class="btn btn-primary">Site</a></h5>
                 </div>

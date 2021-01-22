@@ -37,7 +37,7 @@ def get_offer_details(data, offer_type, offer_number):
     price = data['items'][offer_type][offer_number]['sellingMode']['price']['amount']
     URL = data['items'][offer_type][offer_number]['vendor']['url']
     image = data['items'][offer_type][offer_number]['images'][0]['url']
-    return {"title": offer_title,"area": area,"price": round(float(price)),"url": URL, "image": image}
+    return {"title": offer_title,"area": area,"price": round(int(price)),"url": URL, "image": image}
 
 def get_available_offers(data, city):
     offers = []
