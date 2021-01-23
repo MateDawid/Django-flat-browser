@@ -9,13 +9,24 @@ body {
 form {
   margin-left: 40px;
   margin-right: 40px;
-  color: black;
   font-size: large;
   font-weight: bold;
 }
 
+#pageHeader {
+  background-color: rgb(71, 60, 60);
+  color: white;
+}
+
+#searchForm {
+  margin-left: 1240px;
+  position: fixed; 
+  z-index: 1;
+}
+
 #offersCount {
     margin-left: 100px;
+    color: whitesmoke;
 }
 #offerCard {
     max-width: 940px; 

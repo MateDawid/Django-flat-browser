@@ -9,35 +9,9 @@
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
-    <div class="jumbotron">
+    <div id="pageHeader" class="jumbotron overflow-auto">
         <center><h1>Flatbrowser</h1></center>
     </div>
-    <form method="post" novalidate>
-        {% csrf_token %}
-        <div class="row">
-            <div class="col-sm" style="text-align: center">
-                {{ form.city|bootstrap }}
-            </div>
-            <div class="col-sm" style="text-align: center">
-                {{ form.min_price|bootstrap }}
-            </div>
-            <div class="col-sm" style="text-align: center">
-                {{ form.max_price|bootstrap }}
-            </div>
-            <div class="col-sm" style="text-align: center">
-                {{ form.min_area|bootstrap }}
-            </div>
-            <div class="col-sm" style="text-align: center"> 
-                {{ form.max_area|bootstrap }}
-            </div>
-            <div class="col-sm" style="text-align: center">
-                {{ form.days_from_publication|bootstrap }}
-            </div>
-            <div class="col-1" style="text-align: center; ">
-                <button type="submit" class="btn btn-success">Search</button>
-            </div>
-        </div>
-    </form>
     {% block content %} {% endblock %}
 </body>
 </html>
