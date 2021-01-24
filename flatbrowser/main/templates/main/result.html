@@ -4,82 +4,83 @@
 {% block title %} Flatbrowser {% endblock %}
 
 {% block content %}
-    <div id="searchForm" class="card">
-        <h5 class="card-header">Find your flat</h5>
-        <form method="post" novalidate>
-        {% csrf_token %}
-        <div class="card-body">
-            <div class="row" style="text-align: center">
-                {{ form.city|bootstrap }}
-            </div>
-            <div class="row" style="text-align: center">
-                {{ form.min_price|bootstrap }}
-            </div>
-            <div class="row" style="text-align: center">
-                {{ form.max_price|bootstrap }}
-            </div>
-            <div class="row" style="text-align: center">
-                {{ form.min_area|bootstrap }}
-            </div>
-            <div class="row" style="text-align: center"> 
-                {{ form.max_area|bootstrap }}
-            </div>
-            <div class="row" style="text-align: center">
-                {{ form.days_from_publication|bootstrap }}
-            </div>
-            <div class="row" style="text-align: center; ">
-                <button type="submit" class="btn btn-success">Search</button>
-            </div>
-        </div>
-        </form>
-    </div>
-    </div>
-    <h1 id="offersCount"> Found offers: {{flats_found|length}} </h1>
-    {% for flat in flats_found %}
-        <div id="offerCard" class="card mb-10 text-center">
-            <div class="row">
-                <div class="col-md-5 ">
-                    <img id="offerPicture" class="card-img rounded" src="{{flat.image}}"/>
-                </div>
-                <div class="col-md-7">
-                    <div class="row">
-                        <div class="col">
-                            <h5 id="offerTitle" class="card-text text-left">{{flat.title}}</h5>
-                        </div>
+<div class="row">
+    <div class="col-md-8">
+        {% comment %} <h1 id="offersCount"> Found offers: {{flats_found|length}} </h1> {% endcomment %}
+        {% for flat in flats_found %}
+            <div id="offerCard" class="card mb-10 text-center">
+                <div class="row">
+                    <div class="col-md-5 ">
+                        <img id="offerPicture" class="card-img rounded" src="{{flat.image}}"/>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <h5 id="offerCity" class="card-text text-left">{{flat.city}}</h5> 
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col">
+                                <h5 id="offerCity" class="card-text text-left">{{flat.city}}</h5> 
+                            </div>
+                            <div class="col">
+                                {% if flat.site == "otodom.pl" %}
+                                    <img id="offerSite" src="{% static 'main/otodom.png' %}" class="pull-right">
+                                {% elif flat.site == "morizon.pl" %}
+                                    <img id="offerSite" src="{% static 'main/morizon.png' %}" class="pull-right">
+                                {% elif flat.site == "allegro.pl" %}
+                                    <img id="offerSite" src="{% static 'main/allegro.png' %}" class="pull-right">
+                                {% endif %}                    
+                            </div> 
                         </div>
-                    </div>                    
-                    <div class="row">
-                        <div class="col">
-                            {% if flat.site == "allegro.pl" %}
-                                <p id="offerArea" class="card-text text-right">- m<sup>2</p>
-                            {% else %}
-                                <p id="offerArea" class="card-text text-right">{{flat.area}} m<sup>2</p>
-                            {% endif %}
-                        </div>
-                        <div class="col">
-                            <p id="offerPrice" class="card-text text-left">{{flat.price}} zł</p>
-                        </div>
-                    </div>                    
-                    <div class="row">  
-                        <div class="col">
-                            {% if flat.site == "otodom.pl" %}
-                                <img id="offerSite" src="{% static 'main/otodom.png' %}" class="site-image" height="60">
-                            {% elif flat.site == "morizon.pl" %}
-                                <img id="offerSite" src="{% static 'main/morizon.png' %}" class="site-image" height="60">
-                            {% elif flat.site == "allegro.pl" %}
-                                <img id="offerSite" src="{% static 'main/allegro.png' %}" class="site-image" height="60">
-                            {% endif %}                    
-                        </div>  
-                        <div class="col">
-                            <a href="{{flat.url}}" class="btn btn-primary">Site</a>
-                        </div>                      
-                    </div> 
+                        <div class="row">
+                            <div class="col">
+                                <h5 id="offerTitle" class="card-text text-left">{{flat.title}}</h5>
+                            </div>
+                        </div>                   
+                        <div class="row">
+                            <div class="col">
+                                {% if flat.site == "allegro.pl" %}
+                                    <p id="offerArea" class="card-text">- m<sup>2</p>
+                                {% else %}
+                                    <p id="offerArea" class="card-text">{{flat.area}} m<sup>2</p>
+                                {% endif %}
+                            <p id="offerPrice" class="card-text">{{flat.price}} zł</p>
+                            </div>
+                            <div class="col">
+                                <a id="offerButton" href="{{flat.url}}" class="btn btn-primary">Site</a>
+                            </div>
+                        </div>                    
+                    </div>
                 </div>
             </div>
+        {% endfor %}
+    </div>
+        <div class="col-md-4">
+        <div id="searchForm" class="card">
+            <h5 class="card-header">Find your flat</h5>
+            <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="card-body">
+                <div class="row" style="text-align: center">
+                    {{ form.city|bootstrap }}
+                </div>
+                <div class="row" style="text-align: center">
+                    {{ form.min_price|bootstrap }}
+                </div>
+                <div class="row" style="text-align: center">
+                    {{ form.max_price|bootstrap }}
+                </div>
+                <div class="row" style="text-align: center">
+                    {{ form.min_area|bootstrap }}
+                </div>
+                <div class="row" style="text-align: center"> 
+                    {{ form.max_area|bootstrap }}
+                </div>
+                <div class="row" style="text-align: center">
+                    {{ form.days_from_publication|bootstrap }}
+                </div>
+                <div class="row" style="text-align: center; ">
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
+            </div>
+            </form>
         </div>
-        {% endfor %}          
+    </div>
+</div<     
 {% endblock %}

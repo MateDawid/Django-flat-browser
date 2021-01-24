@@ -9,9 +9,13 @@
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
-    <div id="pageHeader" class="jumbotron overflow-auto">
-        <center><h1>Flatbrowser</h1></center>
-    </div>
+    <nav id="navigationBar" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="/">Flatbrowser</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
     {% block content %} {% endblock %}
 </body>
 </html>
