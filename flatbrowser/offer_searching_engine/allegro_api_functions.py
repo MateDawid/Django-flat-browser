@@ -33,11 +33,15 @@ def get_refresh_token():
 
 def get_offer_details(data, offer_type, offer_number):
     offer_title = data['items'][offer_type][offer_number]['name']
-    area = '0'
+    print(offer_title)
+    area = 0
     price = data['items'][offer_type][offer_number]['sellingMode']['price']['amount']
+    print(price)
     URL = data['items'][offer_type][offer_number]['vendor']['url']
+    print(URL)
     image = data['items'][offer_type][offer_number]['images'][0]['url']
-    return {"title": offer_title,"area": area,"price": round(int(price)),"url": URL, "image": image}
+    print(image)
+    return {"title": offer_title,"area": area,"price": int(float(price)),"url": URL, "image": image}
 
 def get_available_offers(data, city):
     offers = []
@@ -49,8 +53,8 @@ def get_available_offers(data, city):
             offers.append(offer)
         except:
             continue
-    for offer_number in range(len(data['items']['promoted'])):
-        try:    
+    for offer_number in range(len(data['items']['promoted'])): 
+        try:
             offer = get_offer_details(data, 'promoted', offer_number)
             offer["site"] = "allegro.pl"
             offer["city"] = city.title()
@@ -82,11 +86,7 @@ def get_from_allegro_api(city, price_from='', price_to='', area_from='', area_to
             response = session.get(DEFAULT_API_URL + 'offers/listing', params=paramethers)
             data = response.json()
             offers = get_available_offers(data, city)
-            print(offers)
             return offers
         else:
             offers = get_available_offers(data, city)
-            print(offers)
             return offers
-
-get_from_allegro_api('Warszawa')
