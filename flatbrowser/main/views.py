@@ -7,6 +7,10 @@ from .forms import SearchForm
 from offer_searching_engine.scrapping_functions import scrap_otodom, scrap_morizon
 from offer_searching_engine.allegro_api_functions import get_from_allegro_api
 
+def render_home_page(request):
+    form = SearchForm(request.POST or None, request.FILES or None)
+    return render(request,"main/home.html", {"form":form})
+
 def search_flats(request):
     form = SearchForm(request.POST or None, request.FILES or None)
     flats_found = []

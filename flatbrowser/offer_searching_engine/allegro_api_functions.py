@@ -33,14 +33,10 @@ def get_refresh_token():
 
 def get_offer_details(data, offer_type, offer_number):
     offer_title = data['items'][offer_type][offer_number]['name']
-    print(offer_title)
     area = 0
     price = data['items'][offer_type][offer_number]['sellingMode']['price']['amount']
-    print(price)
     URL = data['items'][offer_type][offer_number]['vendor']['url']
-    print(URL)
     image = data['items'][offer_type][offer_number]['images'][0]['url']
-    print(image)
     return {"title": offer_title,"area": area,"price": int(float(price)),"url": URL, "image": image}
 
 def get_available_offers(data, city):

@@ -4,7 +4,6 @@
 {% block title %} Flatbrowser {% endblock %}
 
 {% block content %}
-<div class="row">
     <div class="col-md-8">
         {% comment %} <h1 id="offersCount"> Found offers: {{flats_found|length}} </h1> {% endcomment %}
         {% for flat in flats_found %}
@@ -50,37 +49,5 @@
                 </div>
             </div>
         {% endfor %}
-    </div>
-        <div class="col-md-4">
-        <div id="searchForm" class="card">
-            <h5 class="card-header">Find your flat</h5>
-            <form method="post" novalidate>
-            {% csrf_token %}
-            <div class="card-body">
-                <div class="row" style="text-align: center">
-                    {{ form.city|bootstrap }}
-                </div>
-                <div class="row" style="text-align: center">
-                    {{ form.min_price|bootstrap }}
-                </div>
-                <div class="row" style="text-align: center">
-                    {{ form.max_price|bootstrap }}
-                </div>
-                <div class="row" style="text-align: center">
-                    {{ form.min_area|bootstrap }}
-                </div>
-                <div class="row" style="text-align: center"> 
-                    {{ form.max_area|bootstrap }}
-                </div>
-                <div class="row" style="text-align: center">
-                    {{ form.days_from_publication|bootstrap }}
-                </div>
-                <div class="row" style="text-align: center; ">
-                    <button type="submit" class="btn btn-success">Search</button>
-                </div>
-            </div>
-            </form>
-        </div>
-    </div>
-</div<     
+    </div> 
 {% endblock %}
