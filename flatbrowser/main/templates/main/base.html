@@ -16,7 +16,7 @@
     {% block content %} {% endblock %}
     <div class="col-md-4">  
          <div id="searchForm" class="card">
-            <h5 class="card-header">Find your flat</h5>
+            <h5 class="card-header">Znajdź swoje mieszkanie!</h5>
             <form method="post" novalidate>
                 {% csrf_token %}
                 <div class="card-body">
@@ -39,7 +39,7 @@
                         {{ form.days_from_publication|bootstrap }}
                     </div>
                     <div class="row" style="text-align: center; ">
-                        <button type="submit" class="btn btn-success">Search</button>
+                        <button type="submit" class="btn btn-success">Szukaj</button>
                     </div>
                 </div>
             </form>

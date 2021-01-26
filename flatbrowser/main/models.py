@@ -13,5 +13,16 @@ class Flat(models.Model):
       return (f"{self.id} | {self.site} | {self.city} | {self.title}")
 
 class SearchingResult(models.Model):
-  date = models.DateTimeField(auto_now_add=True)
   results = models.ManyToManyField(Flat)
+
+# class WishList(models.Model):
+#     user = models.ForeignKey(User, related_name='shoplist', on_delete=models.CASCADE)
+#     list_name = models.CharField(max_length=20)
+#     items = models.ManyToManyField(Product)
+#     slug = models.SlugField(max_length=150, db_index=True)
+
+#     def __str__(self):
+#         return self.list_name
+
+#     def get_absolute_url(self):
+#         return reverse('shop:item_list', args=[self.slug])

@@ -4,11 +4,17 @@ body {
     background-position: center; 
     background-attachment: fixed;
     background-size: cover;
-    font-family: 'Oswald', sans-serif !important;
+    font-family: Garamond, serif !important;
   }
 
 #navigationBar{
     font: bold;
+}
+
+#homeCard {
+    margin-top: 30px; 
+    margin-left: 300px;
+    width: 48rem;
 }
 
 #searchForm {
@@ -22,7 +28,6 @@ body {
     color: whitesmoke;
 }
 #offerCard {
-    
     max-width: 940px; 
     max-height: 270px; 
     margin-top: 30px; 
@@ -69,4 +74,9 @@ body {
 
 #offerPrice {
   margin-right: 60px;
+}
+
+#offerButton {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
