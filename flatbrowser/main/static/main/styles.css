@@ -4,14 +4,20 @@ body {
     background-position: center; 
     background-attachment: fixed;
     background-size: cover;
-    font-family: Garamond, serif !important;
+    font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif  !important;
   }
 
 #navigationBar{
     font: bold;
 }
 
-#homeCard {
+#infoMessage {
+    margin-top: 30px; 
+    margin-left: 300px;
+    width: 48rem;
+}
+
+#infoCard {
     margin-top: 30px; 
     margin-left: 300px;
     width: 48rem;
@@ -28,7 +34,7 @@ body {
     color: whitesmoke;
 }
 #offerCard {
-    max-width: 940px; 
+    max-width: 920px; 
     max-height: 270px; 
     margin-top: 30px; 
     margin-right: 20px; 
@@ -47,7 +53,8 @@ body {
 
 #offerTitle {
     font-weight: bold;
-    margin-top: 20px;
+    font-size: 25px;
+    margin-top: 30px;
     margin-left: 50px; 
     margin-right: 20px;
 }
@@ -59,7 +66,7 @@ body {
 }
 
 #offerSite { 
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: 50px; 
   margin-right: 20px;
   max-width: 170px;
@@ -68,15 +75,18 @@ body {
 }
 
 #offerArea {
-  margin-top: 20px;
-  margin-right: 60px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 
 #offerPrice {
-  margin-right: 60px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 
 #offerButton {
-  margin-top: 20px;
+  margin-top: 30px;
   margin-bottom: 10px;
 }

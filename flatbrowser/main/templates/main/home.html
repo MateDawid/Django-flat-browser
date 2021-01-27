@@ -5,15 +5,23 @@
 
 {% block content %}
     <div class="col-md-8">
-        <div id = "homeCard" class="card" style="">
+        {% if messages %}
+            {% for message in messages %}
+                <div id="infoMessage" class="alert alert-light" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div id = "infoCard" class="card" style="">
             <img src={% static 'main/home_image.jpg' %} class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">Flatbrowser</h5>
-                <p class="card-text">Application that enables you researching many websites in order to find your dream home. Use form on your right to search for  </p>
+                <p class="card-text">Aplikacja, która pozwala przeszukiwać wiele stron oferujących mieszkania w celu szybszego znalezienia własnego kąta.</p> 
+                <p class="card-text">Użyj formularza po prawej stronie, aby wyszukać określić parametry wyszukiwania. Zarejestruj się, aby móc zapisywać mieszkania na liście obserwowanych.</p>
             </div>
             <div class="card-body">
-                <a href="#" class="card-link">Login</a>
-                <a href="#" class="card-link">Register</a>
+                <a href="/login" class="card-link">Zaloguj się</a>
+                <a href="/register" class="card-link">Zarejestruj się</a>
             </div>
         </div>
     </div>

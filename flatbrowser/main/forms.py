@@ -1,3 +1,6 @@
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django import forms
 
 class SearchForm(forms.Form):
@@ -44,34 +47,59 @@ class SearchForm(forms.Form):
         else:
             raise forms.ValidationError("Spróbuj wpisać liczbę!")
 
-# class SignUp(forms.Form):
-#     first_name = forms.CharField(initial = "First name")
-#     last_name = forms.CharField(initial = "Last name")
-#     email = forms.EmailField(help_text = "E-mail")
-#     password = forms.CharField(widget = forms.PasswordInput, validators=[check_password_size])
-#     re_password = forms.CharField(help_text = 'Repeat password', widget = forms.PasswordInput)
+class RegistrationForm(forms.Form):
+    username = forms.CharField(label='Podaj nazwę użytkownika', min_length=3, max_length=150)
+    email = forms.EmailField(label='Podaj e-mail')
+    password1 = forms.CharField(label='Podaj hasło',min_length=8, max_length=30, widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Potwierdź hasło',min_length=8, max_length=30, widget=forms.PasswordInput)
 
-#     def clean_age(self):
-#         age = self.cleaned_data['age']
-#         if age < 18:
-#             raise forms.ValidationError("You're not old enough!")
-#         return age
-    
-#     def clean_first_name(self):
-#         first_name = self.cleaned_data["first_name"]
-#         if first_name[0].islower():
-#             raise forms.ValidationError("You should use big char!")
-#         return first_name
-    
-#     def clean_last_name(self):
-#         last_name = self.cleaned_data["last_name"]
-#         if last_name[0].islower():
-#             raise forms.ValidationError("You should use big char!")
-#         return last_name
+    def clean_username(self):
+        username = self.cleaned_data['username'].lower()
+        username_search = User.objects.filter(username=username)
+        if username_search.count():
+            raise  ValidationError("Taka nazwa już została użyta!")
+        return username
 
-#     def clean_re_password(self):
-#         password = self.cleaned_data["password"]
-#         re_password = self.cleaned_data["re_password"]
-#         if password != re_password:
-#            raise forms.ValidationError("Passwords are not the same!")
-#         pass
+    def clean_email(self):
+        email = self.cleaned_data['email'].lower()
+        email_search = User.objects.filter(email=email)
+        if email_search.count():
+            raise  ValidationError("Taki email już został użyty!")
+        return email
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+
+        if password1 and password2 and password1 != password2:
+            raise ValidationError("Podane hasła nie są takie same!")
+
+        return password2
+
+    def save(self, commit=True):
+        user = User.objects.create_user(
+            self.cleaned_data['username'],
+            self.cleaned_data['email'],
+            self.cleaned_data['password1']
+        )
+        return user
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label="Nazwa użytkownika",min_length=3, max_length=150)
+    password = forms.CharField(label="Hasło",widget=forms.PasswordInput())
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        try:
+            user = User.objects.get(username=username)
+            return username
+        except ObjectDoesNotExist:
+            raise forms.ValidationError("Niepoprawna nazwa użytkownika!")        
+    def clean_password(self):
+        if self.cleaned_data.has_key('username'):
+            username = self.cleaned_data['username']
+            password = self.cleaned_data['password']
+            user = User.objects.get(username=username)
+            if user.check_password(password):
+                return password
+            raise forms.ValidationError("Niepoprawne hasło!")                
+        raise forms.ValidationError("Niepoprawna nazwa użytkownika!")

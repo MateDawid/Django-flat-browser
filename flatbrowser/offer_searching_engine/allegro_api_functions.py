@@ -33,17 +33,17 @@ def get_refresh_token():
 
 def get_offer_details(data, offer_type, offer_number):
     offer_title = data['items'][offer_type][offer_number]['name']
-    area = 0
     price = data['items'][offer_type][offer_number]['sellingMode']['price']['amount']
     URL = data['items'][offer_type][offer_number]['vendor']['url']
     image = data['items'][offer_type][offer_number]['images'][0]['url']
-    return {"title": offer_title,"area": area,"price": int(float(price)),"url": URL, "image": image}
+    return {"title": offer_title,"price": int(float(price)),"url": URL, "image": image}
 
-def get_available_offers(data, city):
+def get_available_offers(data, city, area_from):
     offers = []
     for offer_number in range(len(data['items']['regular'])):
         try:
             offer = get_offer_details(data, 'regular', offer_number)
+            offer["area"] = area_from
             offer["site"] = "allegro.pl"
             offer["city"] = city.title()
             offers.append(offer)
@@ -60,7 +60,7 @@ def get_available_offers(data, city):
     return offers
 
 
-def get_from_allegro_api(city, price_from='', price_to='', area_from='', area_to='', days=''):
+def get_from_allegro_api(city, price_from='', price_to='', area_from=0, area_to='', days=''):
     paramethers = {"category.id": 112739, "location.city": str(city), "price.from": str(price_from), "price.to": str(price_to), "parameter.236.from": str(area_from),"parameter.236.to": str(area_to), "startingTime": "P"+str(days)+"D"}
     
     headers = {}
@@ -81,8 +81,8 @@ def get_from_allegro_api(city, price_from='', price_to='', area_from='', area_to
             session.headers.update(headers)
             response = session.get(DEFAULT_API_URL + 'offers/listing', params=paramethers)
             data = response.json()
-            offers = get_available_offers(data, city)
+            offers = get_available_offers(data, city, area_from)
             return offers
         else:
-            offers = get_available_offers(data, city)
+            offers = get_available_offers(data, city, area_from)
             return offers

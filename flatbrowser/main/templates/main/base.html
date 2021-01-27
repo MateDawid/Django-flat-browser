@@ -4,13 +4,26 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/0ad2cb78b0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'main/styles.css' %}">
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
     <nav id="navigationBar" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <a class="navbar-brand" href="/">Flatbrowser</a>
+        <ul class="navbar-nav mr-auto">
+            <a class="navbar-brand" href="/">Flatbrowser</a>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Zaloguj</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Zarejestruj</a>
+            </li>
+        </ul>
     </nav>
 <div class="row">
     {% block content %} {% endblock %}
@@ -20,26 +33,26 @@
             <form method="post" novalidate>
                 {% csrf_token %}
                 <div class="card-body">
-                    <div class="row" style="text-align: center">
+                    <div class="row" style="text-align: center; display: block; margin-left: auto; margin-right: auto;">
                         {{ form.city|bootstrap }}
                     </div>
-                    <div class="row" style="text-align: center">
+                    <div class="row" style="text-align: center; display: block; margin-left: auto; margin-right: auto;">
                         {{ form.min_price|bootstrap }}
                     </div>
-                    <div class="row" style="text-align: center">
+                    <div class="row" style="text-align: center; display: block; margin-left: auto; margin-right: auto;">
                         {{ form.max_price|bootstrap }}
                     </div>
-                    <div class="row" style="text-align: center">
+                    <div class="row" style="text-align: center; display: block; margin-left: auto; margin-right: auto;">
                         {{ form.min_area|bootstrap }}
                     </div>
-                    <div class="row" style="text-align: center"> 
+                    <div class="row" style="text-align: center; display: block; margin-left: auto; margin-right: auto;"> 
                         {{ form.max_area|bootstrap }}
                     </div>
-                    <div class="row" style="text-align: center">
+                    <div class="row" style="text-align: center; display: block; margin-left: auto; margin-right: auto;">
                         {{ form.days_from_publication|bootstrap }}
                     </div>
-                    <div class="row" style="text-align: center; ">
-                        <button type="submit" class="btn btn-success">Szukaj</button>
+                    <div class="row" style="text-align: center; display: block; margin-left: auto; margin-right: auto;">
+                        <button type="submit" class="btn btn-warning">Szukaj</button>
                     </div>
                 </div>
             </form>
