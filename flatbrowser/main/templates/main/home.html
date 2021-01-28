@@ -19,10 +19,14 @@
                 <p class="card-text">Aplikacja, która pozwala przeszukiwać wiele stron oferujących mieszkania w celu szybszego znalezienia własnego kąta.</p> 
                 <p class="card-text">Użyj formularza po prawej stronie, aby wyszukać określić parametry wyszukiwania. Zarejestruj się, aby móc zapisywać mieszkania na liście obserwowanych.</p>
             </div>
+            {% if user.is_authenticated %}
+
+            {% else %}
             <div class="card-body">
                 <a href="/login" class="card-link">Zaloguj się</a>
                 <a href="/register" class="card-link">Zarejestruj się</a>
             </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

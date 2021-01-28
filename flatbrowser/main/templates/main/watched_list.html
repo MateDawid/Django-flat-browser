@@ -54,6 +54,17 @@
                                 <div class="col">
                                     <a id="offerButton" href="{{flat.url}}" target="_blank" class="btn btn-warning"><i class="fas fa-external-link-alt"></i></a>
                                 </div>
+                                {% if user.is_authenticated %}
+                                    {% if flat in user_list%}
+                                    <div class="col">
+                                        <a id="fullHeartButton" href="delete/{{flat.id}}" class="btn btn-light"><i class="fas fa-heart"></i></a>
+                                    </div>
+                                    {% else %}
+                                    <div class="col">
+                                        <a id="hollowHeartButton" href="add/{{flat.id}}" class="btn btn-light"><i class="far fa-heart"></i></a>
+                                    </div>
+                                    {% endif %}
+                                {% endif %}
                             </div>                    
                         </div>
                     </div>

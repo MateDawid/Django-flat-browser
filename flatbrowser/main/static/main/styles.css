@@ -87,6 +87,19 @@ body {
 }
 
 #offerButton {
+  margin-left: 30px;
   margin-top: 30px;
   margin-bottom: 10px;
+}
+
+#hollowHeartButton {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: black !important;
+}
+
+#fullHeartButton {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: red !important;
 }
