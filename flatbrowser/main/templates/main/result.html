@@ -54,6 +54,19 @@
                                 <div class="col">
                                     <a id="offerButton" href="{{flat.url}}" target="_blank" class="btn btn-warning"><i class="fas fa-external-link-alt"></i></a>
                                 </div>
+                                {% if user.is_authenticated %}
+                                    {% if  %}
+                                    <div class="col">
+                                    <!-- Puste-->
+                                        <a id="offerButton" href="{{flat.url}}" target="_blank" class="btn btn-warning"><i class="far fa-heart"></i></a>
+                                    </div>
+                                    {% else %}
+                                    <div class="col">
+                                    <!-- Pełne-->
+                                        <a id="offerButton" href="{{flat.url}}" target="_blank" class="btn btn-warning"><i class="fas fa-heart"></i></a>
+                                    </div>
+                                    {% endif %}
+                                {% endif %}
                             </div>                    
                         </div>
                     </div>

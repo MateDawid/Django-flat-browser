@@ -19,6 +19,10 @@ def render_home_page(request):
     return render(request,"main/home.html", {"form":form})
 
 def search_flats(request):
+    user_list = []
+    if not request.user.is_anonymous:
+        user = request.user
+        user_list = WatchedList.objects.get(user=user).offers.all()
     flats_found = []
     flat_ids = []
     form = SearchForm(request.POST or None, request.FILES or None)
@@ -58,7 +62,7 @@ def search_flats(request):
             flat_ids.append(new_flat.id)
         
     flats_found = Flat.objects.filter(id__in=flat_ids)
-    return render(request, 'main/result.html', {"form":form, "flats_found":flats_found})
+    return render(request, 'main/result.html', {"form":form, "flats_found":flats_found, 'user_list': user_list})
 
 def register(request):
     form = SearchForm(request.POST or None, request.FILES or None)
@@ -96,12 +100,20 @@ def log_out(request):
 
 @login_required
 def display_watched_list(request):
-    return 0
+    form = SearchForm(request.POST or None, request.FILES or None)
+    user = request.user
+    user_list = WatchedList.objects.get(user=user).offers.all()
+    return render(request, 'main/watched_list.html', {'user_list': user_list, 'form': form})
 
 @login_required
-def add_to_watched_list(request):
-    return 0
+def add_to_watched_list(request,id):
+    user = request.user
+    user_list = WatchedList.objects.get(user=user).offers.add(Flat.objects.get(id=id))
+    return redirect(render_home_page)
 
 @login_required
-def delete_from_watched_list(request):
-    return 0
+def delete_from_watched_list(request,id):
+    user = request.user
+    flat = Flat.objects.get(id=id)
+    user_list = WatchedList.objects.get(user=user).offers.remove(flat)
+    return redirect(render_home_page)
