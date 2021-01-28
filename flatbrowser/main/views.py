@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import date
 from datetime import timedelta
 
-from .models import Flat
+from .models import Flat, WatchedList
 from .forms import SearchForm, RegistrationForm, LoginForm
 from offer_searching_engine.scrapping_functions import scrap_otodom, scrap_morizon
 from offer_searching_engine.allegro_api_functions import get_from_allegro_api
@@ -65,21 +65,43 @@ def register(request):
     if request.method == 'POST':
         reg_form = RegistrationForm(request.POST)
         if reg_form.is_valid():
-            reg_form.save()
+            user = reg_form.save()
             messages.success(request, 'Konto zostało utworzone!')
+            user = authenticate(request, username=reg_form.cleaned_data['username'],password=reg_form.cleaned_data['password1'])
+            users_watched_list = WatchedList()
+            users_watched_list.user = user
+            users_watched_list.save()
+            login(request, user)
             return redirect(render_home_page)
     else:
         reg_form = RegistrationForm()
     return render(request, 'main/registration.html', {'reg_form': reg_form, 'form': form})
 
-def login(request):
+def log_in(request):
     form = SearchForm(request.POST or None, request.FILES or None)
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
-            user = authenticate(username=login_form.cleaned_data['username'],password=login_form.cleaned_data['password'])
-            login(request,user)
+            user = authenticate(request, username=login_form.cleaned_data['username'],password=login_form.cleaned_data['password'])
+            login(request, user)
             return redirect(render_home_page)                         
     else: 
         login_form = LoginForm()
     return render(request, 'main/login.html', {'login_form': login_form, 'form': form})
+
+@login_required
+def log_out(request):
+    logout(request)
+    return redirect(render_home_page)
+
+@login_required
+def display_watched_list(request):
+    return 0
+
+@login_required
+def add_to_watched_list(request):
+    return 0
+
+@login_required
+def delete_from_watched_list(request):
+    return 0

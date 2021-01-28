@@ -95,7 +95,7 @@ class LoginForm(forms.Form):
         except ObjectDoesNotExist:
             raise forms.ValidationError("Niepoprawna nazwa użytkownika!")        
     def clean_password(self):
-        if self.cleaned_data.has_key('username'):
+        if self.cleaned_data['username']:
             username = self.cleaned_data['username']
             password = self.cleaned_data['password']
             user = User.objects.get(username=username)

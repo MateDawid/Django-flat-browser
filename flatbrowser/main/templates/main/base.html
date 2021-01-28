@@ -17,12 +17,24 @@
             <a class="navbar-brand" href="/">Flatbrowser</a>
         </ul>
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Zaloguj</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/register">Zarejestruj</a>
-            </li>
+            {% if user.is_authenticated %}
+                <span class="navbar-text" style="margin-right: 30px;">
+                    Witaj {{user.username}}
+                </span>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login">Zapisane oferty</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Wyloguj</a>
+                </li>
+            {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login">Zaloguj</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/register">Zarejestruj</a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 <div class="row">
