@@ -4,7 +4,7 @@
 * [General info](#general-info)
 * [Screenshots](#screenshots)
 * [Technologies](#technologies)
-* [How it work?](#how-it-works?)
+* [How it work?](#how-it-works)
 * [Setup](#setup)
 * [Features](#features)
 * [Status](#status)
@@ -44,20 +44,20 @@ Displaying is different depending on user is logged in or not. If user have logg
 
 ## Setup
 To install and run app you will need to:
-* Clone this repository to your computer or unpack .zip file in chosen directory
-* Run IDE or command line
+* Clone this repository to your computer or unpack .zip file in chosen directory,
+* Run IDE or command line,
 * Command in IDE to install demanded packages:
 > pip install -r requirements.txt
-* Run comand line
-* Type "cd YOUR_DIRECTORY\flatbrowser" in command line
-* Type "python manage.py runserver 8000" in command line
+* Run comand line,
+* Type "cd YOUR_DIRECTORY\flatbrowser" in command line,
+* Type "python manage.py runserver 8000" in command line,
 * Type "http://127.0.0.1:8000/" in your webbrowser.
 
 ## Features
 
 * Function of scrapping data from otodom.pl and morizon.pl using BeautifulSoup4,
 * Function of getting data from Allegro API,
-* Displaying data on website basing on user paramethers (city, price, area, days from publication)
+* Displaying data on website basing on user paramethers (city, price, area, days from publication),
 * User registration, login and logout,
 * Displaying user's watchlist, 
 * Adding to and deleting offers from watchlist.
