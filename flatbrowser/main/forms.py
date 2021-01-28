@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django import forms
 
 class SearchForm(forms.Form):
-    city = forms.CharField(label='Miasto')
+    city = forms.CharField(label='Miasto (pole wymagane)')
     min_price = forms.CharField(label='Minimalna cena', required=False)
     max_price = forms.CharField(label='Maksymalna cena', required=False)
     min_area = forms.CharField(label='Minimalna powierzchnia', required=False)
