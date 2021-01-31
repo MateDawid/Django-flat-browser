@@ -1,1 +1,0 @@
-web: gunicorn flatbrowser.flatbrowser.wsgi --log-file -

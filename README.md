@@ -1,7 +1,9 @@
+# URL Adress
+https://flatbrowser.herokuapp.com/
+
 # Flat-browser
 > This application enables to browse flat offers in chosen city, price and surface area in your webbrowser. It collects data from external API and using webscraping.
 ## Table of contents
-* [General info](#general-info)
 * [Screenshots](#screenshots)
 * [Technologies](#technologies)
 * [How it work?](#how-it-works)
@@ -27,6 +29,7 @@
 ## Technologies
 * Python 3.8.1
 * Django 3.1.5
+* MySQL
 * BeautifulSoup4
 * Bootstrap
 * requests
@@ -63,6 +66,6 @@ To install and run app you will need to:
 * Adding to and deleting offers from watchlist.
 
 ## Status
-Ready to use. Needs to be uploaded to Heroku.
+Ready to use. Uploaded on Heroku. Needs responsiveness improvements.
 ## Contact
 Created by [@matedawid](https://linkedin.com/in/matedawid) - if you have any questions, just contact me!
