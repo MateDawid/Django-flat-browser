@@ -3,13 +3,14 @@ import json
 import os.path
 import pathlib
 import webbrowser
+from decouple import config
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 DEFAULT_OAUTH_URL = 'https://allegro.pl/auth/oauth'
 DEFAULT_API_URL = 'https://api.allegro.pl/'
 DEFAULT_REDIRECT_URI = 'http://localhost:8000'
-client = "1314c86f6d4c421b8738c2438073533b"
-secret = "i7MkPimYuHmxEzj7vsx0x6oPPHbuzm13HczpB0eSMOY82dxlTA1i2G1d6tHdsUZZ"
+client = config('client')
+secret = config('secret')
 
 def get_access_code(client_id, redirect_uri=DEFAULT_REDIRECT_URI, oauth_url=DEFAULT_OAUTH_URL):
     auth_url = '{}/authorize' \
