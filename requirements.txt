@@ -19,3 +19,4 @@ static3==0.7.0
 urllib3==1.26.2
 gunicorn
 psycopg2
+django-heroku
