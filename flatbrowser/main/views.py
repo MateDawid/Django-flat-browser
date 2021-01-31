@@ -44,10 +44,11 @@ def search_flats(request):
         
     for offer in found_offers:
         if Flat.objects.filter(image=offer["image"]).count() >= 1:
-            already_found_flat = Flat.objects.get(image=offer["image"])
-            already_found_flat.date = date.today() - timedelta(days=days_from_publication) if isinstance(days_from_publication, int) else date.today()
-            already_found_flat.save()
-            flat_ids.append(already_found_flat.id)
+            already_found_flats = Flat.objects.filter(image=offer["image"])
+            for flat in already_found_flats:
+                flat.date = date.today() - timedelta(days=days_from_publication) if isinstance(days_from_publication, int) else date.today()
+                flat.save()
+                flat_ids.append(flat.id)
         else:
             new_flat = Flat() 
             new_flat.site = offer["site"]

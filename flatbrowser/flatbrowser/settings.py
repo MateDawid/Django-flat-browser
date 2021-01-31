@@ -78,8 +78,10 @@ WSGI_APPLICATION = 'flatbrowser.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_flatbrowser',
+        'USER': 'root',
+        'PASSWORD': 'root',
     }
 }
 
