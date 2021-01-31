@@ -1,1 +1,1 @@
-web: gunicorn flatbrowser.wsgi --log-file -
+web: gunicorn flatbrowser.flatbrowser.wsgi --log-file -
