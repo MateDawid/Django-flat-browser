@@ -149,4 +149,4 @@ def get_from_allegro_api(city, price_from='', price_to='', area_from=0, area_to=
             offers = get_available_offers(data, city, area_from)
             return offers
         except:
-            pass
+            return []
