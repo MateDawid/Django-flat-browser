@@ -95,11 +95,12 @@ class LoginForm(forms.Form):
         except:
             raise ValidationError("Niepoprawna nazwa użytkownika!")        
     def clean_password(self):
-        if self.cleaned_data['username']:
+        try:
             username = self.cleaned_data['username']
             password = self.cleaned_data['password']
             user = User.objects.get(username=username)
             if user.check_password(password):
                 return password
-            raise ValidationError("Niepoprawne hasło!")                
-        raise ValidationError("Niepoprawna nazwa użytkownika!")
+            raise ValidationError("Niepoprawne hasło!") 
+        except:
+            raise ValidationError("Niepoprawne hasło!") 
