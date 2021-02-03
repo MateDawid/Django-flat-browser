@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
     background-image: url("background.jpg");
     background-repeat: no-repeat;
@@ -30,12 +36,14 @@ body {
     margin-top: 30px; 
     margin-left: 300px;
     width: 48rem;
+    flex-wrap: wrap
 }
 
 #searchForm {
     margin-top: 30px;
     position: fixed;
     z-index: 1;
+    flex-wrap: wrap;
 }
 
 #offersCount {
@@ -111,4 +119,103 @@ body {
   margin-top: 30px;
   margin-bottom: 10px;
   color: red !important;
+}
+
+@media (max-width: 640px) {
+  
+  div {
+    display: block;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    
+  }
+  
+  #infoCard {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  #searchForm {
+    margin-top: 30px !important;
+    margin-left: 50px;
+    position: absolute;
+    flex-wrap: wrap;
+  }
+
+  #offersCount {
+    margin-left: 5px;
+    color: whitesmoke;
+  }
+  #offerCard {
+      max-width: 100% !important; 
+      max-height: 270px !important; 
+      margin-top: 5px !important; 
+      margin-right: 5px; 
+      margin-bottom: 5px !important; 
+      margin-left: 5px;
+      border-style: solid;
+      border-color: rgb(0, 0, 0);
+      border-width: thick;
+  }
+
+  #offerPicture {
+      visibility: hidden;
+      clear: both;
+      display: none;
+      max-width: 0%; 
+      object-fit: cover;
+  }
+
+  #offerTitle {
+      font-weight: bold;
+      font-size: 25px;
+      margin-top: 30px !important;
+      margin-left: 50px; 
+      margin-right: 20px;
+  }
+
+  #offerCity {
+      margin-top: 30px !important;
+      margin-left: 5px; 
+      margin-right: 5px;
+  }
+
+  #offerSite { 
+    margin-top: 30px !important;
+    margin-left: 5px; 
+    margin-right: 5px;
+    max-width: 170px;
+    height:auto;
+    float:right
+  }
+
+  #offerArea {
+    margin-top: 30px !important;
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+
+  #offerPrice {
+    margin-top: 30px !important;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  #offerButton {
+    margin-left: 30px !important;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  #hollowHeartButton {
+    margin-top: 30px !important;
+    margin-bottom: 10px;
+    color: black !important;
+  }
+
+  #fullHeartButton {
+    margin-top: 30px !important;
+    margin-bottom: 10px;
+    color: red !important;
+  }
 }
