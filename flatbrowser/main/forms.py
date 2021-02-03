@@ -54,7 +54,7 @@ class RegistrationForm(forms.Form):
     password2 = forms.CharField(label='Potwierdź hasło',min_length=8, max_length=30, widget=forms.PasswordInput)
 
     def clean_username(self):
-        username = self.cleaned_data['username'].lower()
+        username = self.cleaned_data['username']
         username_search = User.objects.filter(username=username)
         if username_search.count():
             raise  ValidationError("Taka nazwa już została użyta!")
@@ -92,8 +92,8 @@ class LoginForm(forms.Form):
         try:
             user = User.objects.get(username=username)
             return username
-        except ObjectDoesNotExist:
-            raise forms.ValidationError("Niepoprawna nazwa użytkownika!")        
+        except:
+            raise ValidationError("Niepoprawna nazwa użytkownika!")        
     def clean_password(self):
         if self.cleaned_data['username']:
             username = self.cleaned_data['username']
@@ -101,5 +101,5 @@ class LoginForm(forms.Form):
             user = User.objects.get(username=username)
             if user.check_password(password):
                 return password
-            raise forms.ValidationError("Niepoprawne hasło!")                
-        raise forms.ValidationError("Niepoprawna nazwa użytkownika!")
+            raise ValidationError("Niepoprawne hasło!")                
+        raise ValidationError("Niepoprawna nazwa użytkownika!")
