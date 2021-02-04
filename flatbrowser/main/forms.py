@@ -4,12 +4,12 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django import forms
 
 class SearchForm(forms.Form):
-    city = forms.CharField(label='Miasto (pole wymagane)')
-    min_price = forms.CharField(label='Minimalna cena', required=False)
-    max_price = forms.CharField(label='Maksymalna cena', required=False)
-    min_area = forms.CharField(label='Minimalna powierzchnia', required=False)
-    max_area = forms.CharField(label='Maksymalna powierzchnia', required=False)
-    days_from_publication = forms.CharField(label='Dni od dodania', required=False)
+    city = forms.CharField(label="", help_text="",widget=forms.TextInput(attrs={'placeholder': 'Miasto (wymagane)', 'class' : 'formField'}))
+    min_price = forms.CharField(label="", help_text="",widget=forms.TextInput(attrs={'placeholder': 'Cena min.', 'class' : 'formField'}), required=False)
+    max_price = forms.CharField(label="", help_text="",widget=forms.TextInput(attrs={'placeholder': 'Cena max.', 'class' : 'formField'}), required=False)
+    min_area = forms.CharField(label="", help_text="",widget=forms.TextInput(attrs={'placeholder': 'Powierzchnia min.', 'class' : 'formField'}), required=False)
+    max_area = forms.CharField(label="", help_text="",widget=forms.TextInput(attrs={'placeholder': 'Powierzchnia max.', 'class' : 'formField'}), required=False)
+    days_from_publication = forms.CharField(label="", help_text="",widget=forms.TextInput(attrs={'placeholder': 'Dni od dodania', 'class' : 'formField'}), required=False)
 
     def clean_min_price(self):
         min_price = self.cleaned_data['min_price']

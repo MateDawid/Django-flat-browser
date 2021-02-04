@@ -47,28 +47,12 @@
             <form method="post" novalidate>
                 {% csrf_token %}
                 <div class="card-body">
-                    <div class="row">
-                        {{ form.city|bootstrap }}
-                    </div>
-                    <div class="row">
-                        {{ form.min_price|bootstrap }}
-                    </div>
-                    <div class="row">
-                        {{ form.max_price|bootstrap }}
-                    </div>
-                    <div class="row">
-                        {{ form.min_area|bootstrap }}
-                    </div>
-                    <div class="row"> 
-                        {{ form.max_area|bootstrap }}
-                    </div>
-                    <div class="row">
-                        {{ form.days_from_publication|bootstrap }}
-                    </div>
+                    {{ form.as_p }}
                     <div class="row">
                         <button type="submit" href="results" class="btn btn-warning">Szukaj</button>
                     </div>
                 </div>
+                
             </form>
         </div>
     </div>
