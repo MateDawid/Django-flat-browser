@@ -52,6 +52,7 @@ def sign_in(client_id, client_secret, access_code, redirect_uri=DEFAULT_REDIRECT
     
     with open(os.path.join(pathlib.Path(__file__).parent.absolute(), 'access.json'), 'w') as json_file:
         json.dump(response.json(), json_file)
+    print("New tokens")
     return response.json()
 
 def refresh_token(client_id, client_secret, refresh_token, oauth_url=DEFAULT_OAUTH_URL):
@@ -67,6 +68,7 @@ def refresh_token(client_id, client_secret, refresh_token, oauth_url=DEFAULT_OAU
 
         with open(os.path.join(pathlib.Path(__file__).parent.absolute(), 'access.json'), 'w') as json_file:
             json.dump(response.json(), json_file)
+        print("Token refreshed")
     except:
         pass
 
@@ -74,6 +76,7 @@ def get_current_token():
     try:
         with open(os.path.join(pathlib.Path(__file__).parent.absolute(), 'access.json')) as f:
             data = json.load(f)
+            print("Get current token")
             return data['access_token']
     except:
         pass
@@ -82,7 +85,8 @@ def get_refresh_token():
     try:
         with open(os.path.join(pathlib.Path(__file__).parent.absolute(), 'access.json')) as f:
             data = json.load(f)
-            return data['refresh_token']
+            print("Get refresh token")
+            return data['refresh_token']       
     except:
         pass
 
