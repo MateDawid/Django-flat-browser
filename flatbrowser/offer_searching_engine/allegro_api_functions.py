@@ -145,12 +145,11 @@ def get_from_allegro_api(city, price_from='', price_to='', area_from=0, area_to=
                 headers['Authorization'] = "Bearer {}".format(get_current_token())
                 session.headers.update(headers)
                 response = session.get(DEFAULT_API_URL + 'offers/listing', params=paramethers)
-                
-                if response.status_code == 401:
-                    sign_in(client, secret, get_access_code(client))
 
             data = response.json()
             offers = get_available_offers(data, city, area_from)
             return offers
         except:
             return []
+
+#sign_in(client, secret, get_access_code(client))
