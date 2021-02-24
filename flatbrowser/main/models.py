@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+class RefreshToken(models.Model):
+    refresh_token = models.CharField(max_length=2000)
+
+
 class Flat(models.Model):
   site = models.CharField(max_length=100)
   city = models.CharField(max_length=100)
@@ -13,6 +18,7 @@ class Flat(models.Model):
 
   def __str__(self):
       return (f"{self.id} | {self.site} | {self.city} | {self.title}")
+
 
 class WatchedList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrapform',
-    'main'
+    'main',
+    'offer_searching_engine'
 ]
 
 MIDDLEWARE = [

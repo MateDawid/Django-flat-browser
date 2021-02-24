@@ -5,7 +5,7 @@ import pathlib
 import webbrowser
 from decouple import config
 from http.server import BaseHTTPRequestHandler, HTTPServer
-
+from main.models import RefreshToken
 
 DEFAULT_OAUTH_URL = 'https://allegro.pl/auth/oauth'
 DEFAULT_API_URL = 'https://api.allegro.pl/'
@@ -52,11 +52,9 @@ def sign_in(client_id, client_secret, access_code, redirect_uri=DEFAULT_REDIRECT
     response = requests.post(url=token_url,
                              auth=requests.auth.HTTPBasicAuth(client_id, client_secret),
                              data=access_token_data)
-
-    with open(os.path.join(pathlib.Path(__file__).parent.absolute(), 'access.json'), 'w') as json_file:
-        json.dump(response.json(), json_file)
-    print("New tokens")
-    return response.json()
+    new_refresh_token = RefreshToken.objects.all().first()
+    new_refresh_token.refresh_token = response.json()['refresh_token']
+    new_refresh_token.save()
 
 
 def refresh_token(client_id, client_secret, refresh_token, oauth_url=DEFAULT_OAUTH_URL):
@@ -70,9 +68,10 @@ def refresh_token(client_id, client_secret, refresh_token, oauth_url=DEFAULT_OAU
                                  auth=requests.auth.HTTPBasicAuth(client_id, client_secret),
                                  data=access_token_data)
 
-        with open(os.path.join(pathlib.Path(__file__).parent.absolute(), 'access.json'), 'w') as json_file:
-            json.dump(response.json(), json_file)
-        print("Token refreshed")
+        new_refresh_token = RefreshToken.objects.all().first()
+        new_refresh_token.refresh_token = response.json()['refresh_token']
+        new_refresh_token.save()
+
     except:
         pass
 
@@ -88,22 +87,8 @@ def get_current_token(client_id, client_secret, oauth_url=DEFAULT_OAUTH_URL):
     return response.json()['access_token']
 
 
-def get_refresh_token(client_id, client_secret, oauth_url=DEFAULT_OAUTH_URL):
-    # try:
-    #     with open(os.path.join(pathlib.Path(__file__).parent.absolute(), 'access.json')) as f:
-    #         data = json.load(f)
-    #         print("Get refresh token")
-    #         return data['refresh_token']
-    # except:
-    #     pass
-    token_url = oauth_url + '/token'
-    access_token_data = {'grant_type': 'refresh_token'}
-
-    response = requests.post(url=token_url,
-                             auth=requests.auth.HTTPBasicAuth(client_id, client_secret),
-                             data=access_token_data)
-
-    return response.json()
+def get_refresh_token():
+    return RefreshToken.objects.all().first().refresh_token
 
 
 def get_offer_details(data, offer_type, offer_number):
@@ -168,7 +153,10 @@ def get_from_allegro_api(city, price_from='', price_to='', area_from=0, area_to=
             data = response.json()
             offers = get_available_offers(data, city, area_from)
             return offers
+
         except:
             return []
 
-#sign_in(client, secret, get_access_code(client))
+# sign_in(client, secret, get_access_code(client))
+print(get_refresh_token())
+
