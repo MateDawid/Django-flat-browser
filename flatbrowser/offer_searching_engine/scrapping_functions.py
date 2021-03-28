@@ -61,7 +61,7 @@ def scrap_otodom (city,price_from="",price_to="",area_from="0",area_to="",days="
     adress = "https://www.otodom.pl/sprzedaz/mieszkanie/"+str(adress_city)+"/?search%5Bcreated_since%5D="+str(days)+"&search%5Bfilter_float_price%3Afrom%5D="+str(price_from)+"&search%5Bfilter_float_price%3Ato%5D="+str(price_to)+"&search%5Bfilter_float_m%3Afrom%5D="+str(area_from)+"&search%5Bfilter_float_m%3Ato%5D="+str(area_to)+"&nrAdsPerPage=72" 
 
     # Connecting with page
-    page = requests.get(adress)
+    page = requests.get(adress, verify=False)
     soup = BeautifulSoup(page.content,"html.parser")
     elements = soup.findAll("article",attrs={"class":"offer-item"})
     offers = []
@@ -82,7 +82,7 @@ def scrap_morizon(city,price_from="",price_to="",area_from="0",area_to="",days="
     adress = prepare_morizon_adress(city, price_from, price_to, area_from, area_to, days)
     
     # Connecting with page
-    page = requests.get(adress)
+    page = requests.get(adress, verify=False)
     soup = BeautifulSoup(page.content,"html.parser")
     elements = soup.findAll("div",attrs={"class":"row row--property-list"})
     offers = []

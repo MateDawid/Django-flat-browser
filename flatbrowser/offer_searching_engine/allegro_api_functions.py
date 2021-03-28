@@ -158,5 +158,3 @@ def get_from_allegro_api(city, price_from='', price_to='', area_from=0, area_to=
             return []
 
 # sign_in(client, secret, get_access_code(client))
-print(get_refresh_token())
-
